@@ -1,3 +1,675 @@
+/* --- Variables & Color Palette (BASED ON UPLOADED IMAGE) --- */
+:root {
+    /* Menggunakan 6 Kode Warna dari Gambar */
+    --color-lightest: #EFF3FF;
+    --color-light:    #C6DBEF;
+    --color-soft:     #9ECAE1;
+    --color-mid:      #6BAED6;
+    --color-strong:   #3182BD;
+    --color-dark:     #08519C;
+
+    /* Mapping ke Variabel Website */
+    --bg-color: var(--color-dark);       /* Background Utama (#08519C) */
+    --card-bg: rgba(49, 130, 189, 0.3);  /* Kartu menggunakan #3182BD transparan */
+    --primary: var(--color-mid);         /* Warna Utama/Tombol (#6BAED6) */
+    --accent: var(--color-soft);         /* Warna Pemanis (#9ECAE1) */
+    
+    --text-light: var(--color-lightest); /* Teks Utama (#EFF3FF) */
+    --text-dim: var(--color-light);      /* Teks Deskripsi (#C6DBEF) */
+    
+    --font-main: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- ANIMATED BACKGROUND (BUBBLES) --- */
+/* Menggunakan warna-warna dari palet agar background 'hidup' */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 15% 50%, var(--color-strong), transparent 25%),
+        radial-gradient(circle at 85% 30%, var(--color-mid), transparent 25%),
+        radial-gradient(circle at 50% 80%, var(--color-strong), transparent 30%);
+    filter: blur(60px); /* Efek blur agar halus */
+    animation: floatingGlow 15s ease-in-out infinite alternate;
+    opacity: 0.6;
+}
+
+@keyframes floatingGlow {
+    0% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(-20px, 20px); }
+    100% { transform: scale(1) translate(20px, -20px); }
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    /* Glassmorphism effect */
+    background: rgb(8, 97, 186); /* #08519C dengan transparansi */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-shadow: 0 0 10px rgba(239, 243, 255, 0.5);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--text-light);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+    padding-top: 80px;
+}
+
+.hero-content h3 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.highlight {
+    color: var(--color-mid); /* #6BAED6 */
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(107, 174, 214, 0.3);
+}
+
+.hero-content p {
+    color: var(--text-dim);
+    max-width: 500px;
+    margin-bottom: 2rem;
+}
+
+.social-links a {
+    color: var(--text-dim);
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--text-light);
+    transform: translateY(-3px);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 35px;
+    background: var(--color-mid); /* #6BAED6 */
+    color: var(--color-dark);     /* Teks gelap agar kontras di tombol terang */
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 2rem;
+    transition: 0.3s;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(107, 174, 214, 0.4);
+}
+
+.btn:hover {
+    background: var(--color-soft); /* #9ECAE1 */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(158, 202, 225, 0.5);
+}
+
+.hero-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img img {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--color-mid);
+    box-shadow: 0 0 30px rgba(107, 174, 214, 0.3);
+}
+
+/* Common Section Styles */
+.section {
+    padding: 5rem 10%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-light);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--color-mid);
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+/* About & Spotify */
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text p {
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    text-align: left; 
+}
+
+.spotify-widget {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.spotify-header {
+    margin-bottom: 1rem;
+    color: #1DB954;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Skills */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.skill-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    background: rgba(49, 130, 189, 0.5); /* Lebih terang dikit pas hover */
+    border-color: var(--color-mid);
+}
+
+.skill-card i {
+    font-size: 2.5rem;
+    color: var(--color-soft); /* #9ECAE1 */
+    margin-bottom: 1rem;
+}
+
+.skill-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.skill-card p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* Organization Styles */
+.org-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.org-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: 0.3s;
+}
+
+.org-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: 0.3s;
+    border-left: 5px solid var(--color-mid); /* #6BAED6 */
+    backdrop-filter: blur(5px);
+}
+
+.org-link:hover .org-card {
+    transform: translateX(10px);
+    background: rgba(49, 130, 189, 0.5);
+    border-left-color: var(--color-soft); /* #9ECAE1 */
+}
+
+.org-icon {
+    background: rgba(198, 219, 239, 0.2); /* #C6DBEF transparan */
+    color: var(--color-lightest);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.org-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    color: var(--text-light);
+}
+
+.org-content h4 {
+    color: var(--color-soft); /* #9ECAE1 */
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.org-year {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dim);
+}
+
+.org-content p {
+    color: var(--text-dim);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Projects */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-mid);
+    box-shadow: 0 10px 20px rgba(8, 81, 156, 0.4);
+}
+
+.project-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--text-light);
+}
+
+.tech-stack {
+    margin-bottom: 1rem;
+}
+
+.tech-stack span {
+    background: rgba(107, 174, 214, 0.2); /* #6BAED6 transparan */
+    color: var(--color-lightest);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+    border: 1px solid var(--color-strong);
+}
+
+.project-info p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Gallery Aesthetic */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 5%;
+}
+
+.gallery-item {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+    display: block;
+    filter: grayscale(40%);
+    transition: 0.5s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    z-index: 10;
+    border-color: var(--color-mid);
+}
+
+.gallery-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Footer */
+footer {
+    background: #063e77; /* Versi lebih gelap sedikit dari #08519C untuk footer */
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content h2 {
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.footer-content p {
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+}
+
+.copyright {
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    opacity: 0.6;
+}
+
+/* --- REIL MODAL STYLES --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(8, 81, 156, 0.9); /* #08519C transparan */
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content.reil-modal-wide {
+    background: #154575; /* Gelap di antara strong dan dark */
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    border: 2px solid var(--color-mid);
+    box-shadow: 0 0 40px rgba(107, 174, 214, 0.3);
+    border-radius: 20px;
+}
+
+.close-btn {
+    position: sticky;
+    top: 0;
+    float: right;
+    color: var(--text-light);
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--color-mid);
+}
+
+.reil-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.reil-header h2 {
+    color: var(--color-mid);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.reil-header p {
+    color: var(--text-dim);
+}
+
+/* Grid Layout untuk 6 Foto Reil */
+.reil-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.reil-card {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid rgba(107, 174, 214, 0.3);
+    transition: 0.3s;
+    background: var(--color-dark);
+}
+
+.reil-card:hover {
+    transform: scale(1.05);
+    border-color: var(--color-lightest);
+    box-shadow: 0 5px 15px rgba(239, 243, 255, 0.3);
+    z-index: 5;
+}
+
+.reil-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Mobile Responsive */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background: var(--text-light);
+    margin: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .hero {
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        height: auto;
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .org-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .org-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .about-text p {
+        text-align: center;
+    }
+    .spotify-widget {
+        width: 100%;
+    }
+    
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+
+    .reil-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .modal-content.reil-modal-wide {
+        padding: 1.5rem;
+    }
+}
+
 /* --- UPDATE: Mobile Responsive (Paste di bagian paling bawah style.css) --- */
 @media screen and (max-width: 768px) {
     /* Hamburger Menu Icon */
