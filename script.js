@@ -4,15 +4,26 @@ AOS.init({
     once: true,
 });
 
-// Mobile Navigation Toggle
+// --- UPDATE: Mobile Navigation Logic ---
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
 
 if (hamburger) {
     hamburger.addEventListener('click', () => {
-        alert("Menu clicked! (Tambahkan style mobile menu di CSS jika ingin fungsi penuh)");
+        // Toggle class 'active' untuk memunculkan/menyembunyikan menu
+        navLinks.classList.toggle('active');
     });
 }
+
+// Menutup menu saat salah satu link diklik (biar ga ngehalangin layar)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+});
+// ---------------------------------------
 
 // Smooth Scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
